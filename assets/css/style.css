@@ -1,0 +1,941 @@
+/* ============================================
+   DHANUSH T S — PORTFOLIO CSS
+   File: assets/css/style.css
+   Rule: ONLY styling lives here. No HTML. No JS.
+   ============================================ */
+
+/* ============================================
+   1. CSS VARIABLES (Your Design System)
+      → Change colors/fonts in ONE place
+      → Affects the ENTIRE website
+   ============================================ */
+:root {
+  /* Colors */
+  --accent:       #13ea94;   /* Green highlight */
+  --accent2:      #00cfff;   /* Blue highlight  */
+  --bg:           #2626b9;   /* Page background */
+  --surface:      #13131a;   /* Card background */
+  --border:       #1e1e2e;   /* Border color    */
+  --text:         #e0e0f0;   /* Main text       */
+  --text-muted:   #888888;   /* Dimmed text     */
+  --text-dim:     #444444;   /* Very dim text   */
+
+  /* Typography */
+  --font-main:    'Syne', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+
+  /* Spacing */
+  --section-pad:  8rem;
+
+  /* Borders */
+  --radius-sm:    8px;
+  --radius-md:    16px;
+  --radius-lg:    24px;
+  --radius-full:  999px;
+
+  /* Transitions */
+  --transition:   0.3s ease;
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* ============================================
+   2. RESET & BASE
+      → Normalize browser defaults
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+  cursor: none; /* hides default cursor — we use custom one */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: var(--font-main);
+  cursor: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: var(--bg); }
+::-webkit-scrollbar-thumb  { background: var(--accent); border-radius: var(--radius-full); }
+
+
+/* ============================================
+   3. BACKGROUND EFFECTS
+      → Noise, mesh gradients, grid lines
+   ============================================ */
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Gradient mesh — colored glow blobs */
+.mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 700px 500px at 10% 20%,  rgba(0, 255, 153, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 400px at 90% 80%,  rgba(0, 207, 255, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 50% 50%,  rgba(100, 0, 255, 0.04) 0%, transparent 70%);
+  animation: meshFloat 12s ease-in-out infinite alternate;
+}
+
+@keyframes meshFloat {
+  0%   { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 1;   transform: scale(1.05); }
+}
+
+/* Grid lines */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* All sections above background */
+section, nav, footer {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ============================================
+   4. CUSTOM CURSOR
+   ============================================ */
+#cursor {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    width     0.2s ease,
+    height    0.2s ease,
+    background 0.2s ease;
+  mix-blend-mode: screen;
+}
+
+/* Cursor grows when hovering interactive elements */
+#cursor.big {
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 255, 153, 0.25);
+}
+
+#cursor.clicking {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+}
+
+
+/* ============================================
+   5. TYPOGRAPHY HELPERS
+   ============================================ */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.accent-text  { color: var(--accent); }
+.accent2-text { color: var(--accent2); }
+.muted-text   { color: var(--text-muted); }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+
+/* ============================================
+   6. NAVIGATION
+   ============================================ */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+
+nav.scrolled {
+  background: rgba(10, 10, 15, 0.95);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+  position: relative;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--transition);
+  padding-bottom: 2px;
+}
+
+/* Animated underline on hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover        { color: var(--accent); }
+.nav-link:hover::after { width: 100%; }
+.nav-link.active       { color: var(--accent); }
+.nav-link.active::after{ width: 100%; }
+
+
+/* ============================================
+   7. MOBILE MENU
+   ============================================ */
+#mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(10, 10, 15, 0.97);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  backdrop-filter: blur(20px);
+}
+
+#mobile-menu.open {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+#mobile-menu a {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text);
+  transition: color var(--transition), transform var(--transition);
+}
+
+#mobile-menu a:hover {
+  color: var(--accent);
+  transform: translateX(10px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+/* ============================================
+   8. HERO SECTION
+   ============================================ */
+.hero-title {
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+/* Each line animates in separately */
+.hero-line {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-line:nth-child(1) { animation-delay: 0.1s; }
+.hero-line:nth-child(2) { animation-delay: 0.25s; }
+.hero-line:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Avatar box */
+.avatar-box {
+  width: 280px;
+  height: 280px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.avatar-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(0, 255, 153, 0.1),
+    rgba(0, 207, 255, 0.1)
+  );
+}
+
+.avatar-box:hover {
+  transform: translateY(-8px) rotate(1deg);
+  box-shadow: 0 30px 60px rgba(0, 255, 153, 0.15);
+}
+
+/* Decorative glowing ring around avatar */
+.avatar-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: calc(var(--radius-lg) + 3px);
+  background: linear-gradient(135deg, var(--accent), var(--accent2), transparent);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.avatar-box:hover .avatar-ring {
+  opacity: 1;
+}
+
+/* Stats row */
+.stat-num {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  font-family: var(--font-mono);
+}
+
+.stat-item {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+
+/* ============================================
+   9. TAG PILLS
+   ============================================ */
+.tag-pill {
+  display: inline-block;
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+
+.tag-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0, 255, 153, 0.05);
+}
+
+.tag-pill.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0, 255, 153, 0.1);
+}
+
+
+/* ============================================
+   10. BUTTONS
+   ============================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #0a0a0f;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Shimmer effect on button */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 255, 153, 0.35);
+}
+
+.btn-primary:hover::after {
+  left: 150%;
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent);
+  cursor: none;
+  transition: background var(--transition), color var(--transition), transform 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: #3737c3;
+  transform: translateY(-3px);
+}
+
+
+/* ============================================
+   11. CARDS
+   ============================================ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition:
+    border-color var(--transition),
+    transform    var(--transition),
+    box-shadow   var(--transition);
+}
+
+.card:hover {
+  border-color: rgba(0, 255, 153, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0, 255, 153, 0.08);
+}
+
+/* Project card thumbnail */
+.project-thumb {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  transition: transform 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, var(--surface));
+}
+
+.card:hover .project-thumb {
+  transform: scale(1.1);
+}
+
+/* About trait cards */
+.trait-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.trait-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.4s ease;
+}
+
+.trait-card:hover {
+  border-color: rgba(0, 255, 153, 0.2);
+  transform: translateY(-4px);
+}
+
+.trait-card:hover::before {
+  height: 100%;
+}
+
+
+/* ============================================
+   12. SKILL BARS
+   ============================================ */
+.skill-bar-bg {
+  background: var(--border);
+  border-radius: var(--radius-full);
+  height: 6px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: 0; /* starts at 0, JS animates to data-width */
+  transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Moving shimmer on skill bar */
+.skill-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2.5s ease infinite;
+}
+
+@keyframes shimmer {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Tech icon cards in skills */
+.tech-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+  transition: all var(--transition);
+  cursor: default;
+}
+
+.tech-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 255, 153, 0.1);
+}
+
+.tech-card .tech-emoji {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.tech-card:hover .tech-emoji {
+  transform: rotate(10deg) scale(1.2);
+}
+
+
+/* ============================================
+   13. TIMELINE (Experience)
+   ============================================ */
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+}
+
+/* Glowing dot */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 28px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 255, 153, 0.2),
+              0 0 12px var(--accent);
+  z-index: 1;
+  transition: box-shadow 0.3s ease;
+}
+
+.timeline-item:hover::before {
+  box-shadow: 0 0 0 6px rgba(0, 255, 153, 0.2),
+              0 0 20px var(--accent);
+}
+
+/* Vertical connecting line */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 42px;
+  width: 1px;
+  bottom: -20px;
+  background: linear-gradient(to bottom, var(--border), transparent);
+}
+
+.timeline-item:last-child::after {
+  display: none;
+}
+
+
+/* ============================================
+   14. CONTACT FORM INPUTS
+   ============================================ */
+.input-field {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: var(--text);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 255, 153, 0.1);
+}
+
+.input-field::placeholder {
+  color: var(--text-dim);
+}
+
+/* Input label */
+.input-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+
+/* ============================================
+   15. TOAST NOTIFICATION
+   ============================================ */
+#toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  background: var(--accent);
+  color: #0a0a0f;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* ============================================
+   16. SCROLL REVEAL ANIMATIONS
+      → Elements start hidden
+      → JS adds .visible class when in viewport
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity   0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delay for children */
+.reveal:nth-child(1) { transition-delay: 0.05s; }
+.reveal:nth-child(2) { transition-delay: 0.10s; }
+.reveal:nth-child(3) { transition-delay: 0.15s; }
+.reveal:nth-child(4) { transition-delay: 0.20s; }
+.reveal:nth-child(5) { transition-delay: 0.25s; }
+.reveal:nth-child(6) { transition-delay: 0.30s; }
+
+
+/* ============================================
+   17. HOVER GLOW EFFECTS
+   ============================================ */
+
+/* Green glow on any element with this class */
+.glow-on-hover {
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 153, 0.2),
+              0 0 60px rgba(0, 255, 153, 0.05);
+}
+
+/* Text glow */
+.text-glow {
+  text-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+}
+
+/* Pulsing glow animation */
+.pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 153, 0.2); }
+  50%       { box-shadow: 0 0 30px rgba(0, 255, 153, 0.5); }
+}
+
+
+/* ============================================
+   18. LOADING SCREEN
+   ============================================ */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: opacity 0.5s ease;
+}
+
+#loader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-bar {
+  width: 200px;
+  height: 2px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.loader-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: var(--radius-full);
+  animation: load 1.5s ease forwards;
+}
+
+@keyframes load {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+
+/* ============================================
+   19. FOOTER
+   ============================================ */
+footer {
+  border-top: 1px solid var(--border);
+}
+
+footer a {
+  transition: color var(--transition);
+}
+
+footer a:hover {
+  color: var(--accent);
+}
+
+
+/* ============================================
+   20. RESPONSIVE — MOBILE FIRST
+   ============================================ */
+
+/* Small phones */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .avatar-box {
+    width: 200px;
+    height: 200px;
+    font-size: 4rem;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    padding: 12px 20px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  :root {
+    --section-pad: 5rem;
+  }
+
+  .stat-item::before {
+    display: none;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 8rem;
+  }
+}
+
+
+/* ============================================
+   21. UTILITY CLASSES
+   ============================================ */
+.hidden     { display: none !important; }
+.flex       { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.text-center { text-align: center; }
+.w-full     { width: 100%; }
+.relative   { position: relative; }
+.overflow-hidden { overflow: hidden; }
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Divider line */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 2rem 0;
+}
+
+/* Glowing dot indicator */
+.dot-live {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--accent); }
+  50%       { opacity: 0.3; box-shadow: none; }
+}
