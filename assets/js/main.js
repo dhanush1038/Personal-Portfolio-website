@@ -1,4 +1,5 @@
 // assets/js/main.js
+<<<<<<< HEAD
 // ---- Theme Toggle ----
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
@@ -50,6 +51,8 @@ if (themeToggle) {
     }
   });
 }
+=======
+>>>>>>> 8df036c3494e48532acd27fa19986ca13171c207
 
 // ---- Load Data into Page ----
 function loadHero() {
@@ -61,7 +64,11 @@ function loadHero() {
 function loadSkills() {
   const container = document.getElementById('skills-container');
   container.innerHTML = portfolioData.skills.map(skill => `
+<<<<<<< HEAD
     <div>
+=======
+        <div>
+>>>>>>> 8df036c3494e48532acd27fa19986ca13171c207
       <div class="flex justify-between mb-2 text-sm">
         <span>${skill.name}</span>
         <span style="color: var(--accent)">${skill.level}%</span>

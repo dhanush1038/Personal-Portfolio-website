@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+<<<<<<< HEAD
 
 <head>
     <meta charset="UTF-8" />
@@ -491,3 +492,231 @@ command parsing for reception workflows</p>
 </body>
 
 </html>
+=======
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio Website</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="assets/js/main.js" ></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+
+  <!-- YOUR CSS (View) -->
+  <link rel="stylesheet" href="assets/css/style.css"/>  
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+
+  <!-- Background -->
+  <div class="mesh"></div>
+  <div class="grid-bg"></div>
+
+  <!-- Toast Notification -->
+  <div id="toast">✓ Message sent!</div>
+
+  <!-- ===== MOBILE MENU ===== -->
+  <div id="mobile-menu">
+    <a href="#about"      onclick="closeMobile()">About</a>
+    <a href="#projects"   onclick="closeMobile()">Projects</a>
+    <a href="#skills"     onclick="closeMobile()">Skills</a>
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#contact"    onclick="closeMobile()">Contact</a>
+  </div>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <span class="lay" style=color:#b0c31d>&lt;Dev Dhanush /&gt;</span>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#about"      class="nav-link">About</a>
+        <a href="#projects"   class="nav-link">Projects</a>
+        <a href="#skills"     class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#contact"    class="nav-link">Contact</a>
+      </div>
+      <button onclick="toggleMobile()" class="md:hidden flex flex-col gap-1.5 p-2">
+        <span class="block w-6 h-0.5 bg-white"></span>
+        <span class="block w-6 h-0.5 bg-white"></span>
+        <span class="block w-4 h-0.5 bg-white"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO (View) ===== -->
+  <section id="home" class="min-h-screen flex items-center pt-20 px-6">
+    <div class="max-w-6xl mx-auto w-full py-20">
+      <div class="mono text-xs tracking-widest mb-6" style="color: var(--accent)">
+        <span id="typed-text"></span><span class="animate-pulse">_</span>
+      </div>
+      <h1 class="hero-title mb-6">
+        <span class="hero-line block">Hello, I'm</span>
+        <!-- JS fills this 👇 -->
+        <span class="hero-line block accent-text" id="hero-name"></span>
+        <span class="hero-line block" id="hero-title" style="color:#555;"></span>
+      </h1>
+      <p class="text-base leading-relaxed max-w-md mb-8" style="color:#888;"
+         id="hero-tagline"></p>
+      <div class="flex gap-4 flex-wrap">
+        <a href="#projects" class="btn-primary">View Projects ↓</a>
+        <a href="#contact"  class="btn-outline">Hire Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal">
+        <div class="section-label mb-3">// 01 — About</div>
+        <h2 class="section-title mb-16">Who I Am</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <p class="text-lg leading-relaxed mb-6" style="color:#13478f;">
+            I'm a passionate developer who loves turning ideas into beautiful digital products.
+            I focus on clean code, great UI, and smooth user experiences.
+          </p>
+          <div class="flex flex-col gap-3 mono text-sm" style="color:#666;">
+            <div class="flex gap-3">
+              <span style="color:var(--accent)">→</span>
+              <!-- JS fills this 👇 -->
+              <span id="contact-email"></span>
+            </div>
+            <div class="flex gap-3">
+              <span style="color:var(--accent)">→</span>
+              <span id="contact-github"></span>
+            </div>
+          </div>
+          <a href="#" class="btn-primary mt-8 inline-flex">Download CV ↗</a>
+        </div>
+        <div class="reveal grid grid-cols-2 gap-4">
+          <div class="card p-6"><div class="text-3xl mb-3">🎯</div><div class="font-bold">Problem Solver</div></div>
+          <div class="card p-6"><div class="text-3xl mb-3">⚡</div><div class="font-bold">Fast Learner</div></div>
+          <div class="card p-6"><div class="text-3xl mb-3">🎨</div><div class="font-bold">Design-minded</div></div>
+          <div class="card p-6"><div class="text-3xl mb-3">🤝</div><div class="font-bold">Team Player</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects" class="py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal flex items-end justify-between mb-16 flex-wrap gap-4">
+        <div>
+          <div class="section-label mb-3">// 02 — Projects</div>
+          <h2 class="section-title">Featured Work</h2>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="filterProjects('all')"    class="filter-btn active tag-pill" data-filter="all">All</button>
+          <button onclick="filterProjects('web')"    class="filter-btn tag-pill" data-filter="web">Web</button>
+          <button onclick="filterProjects('mobile')" class="filter-btn tag-pill" data-filter="mobile">Mobile</button>
+        </div>
+      </div>
+      <!-- JS fills this 👇 -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid"></div>
+    </div> 
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section id="skills" class="py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <div class="section-label mb-3">// 03 — Skills</div>
+        <h2 class="section-title">My Toolkit</h2>
+      </div>
+      <!-- JS fills this 👇 -->
+      <div class="flex flex-col gap-6 max-w-xl" id="skills-container"></div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section id="experience" class="py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <div class="section-label mb-3">// 04 — Experience</div>
+        <h2 class="section-title">My Journey</h2>
+      </div>
+      <!-- JS fills this 👇 -->
+      <div class="flex flex-col gap-10 max-w-2xl" id="experience-container"></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="py-32 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="reveal mb-16">
+        <div class="section-label mb-3">// 05 — Contact</div>
+        <h2 class="section-title">Let's Talk</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-16">
+        <div class="reveal">
+          <p class="text-lg mb-8" style="color:#888;">Have a project? Let's connect — I reply within 24 hours.</p>
+          <div class="flex flex-col gap-4 mono text-sm" style="color:#666;">
+            <div><span style="color:var(--accent)">✉ </span><span id="contact-email-2"></span></div>
+            <div><span style="color:var(--accent)">⌥ </span><span id="contact-github-2"></span></div>
+            <div><span style="color:var(--accent)">in </span><span id="contact-linkedin"></span></div>
+          </div>
+        </div>
+        <div class="card p-8 reveal">
+          <div class="flex flex-col gap-4">
+            <input  type="text"  id="form-name"    placeholder="Your name"     class="input-field"/>
+            <input  type="email" id="form-email"   placeholder="Your email"    class="input-field"/>
+            <input  type="text"  id="form-subject" placeholder="Subject"       class="input-field"/>
+            <textarea            id="form-message" placeholder="Your message"
+              rows="4" class="input-field resize-none"></textarea>
+            <button onclick="sendMessage()" class="btn-primary w-full justify-center">
+              Send Message →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="border-top:1px solid var(--border);" class="py-10 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <span class="mono text-sm" style="color:var(--accent)">&lt;Dhanush /&gt;</span>
+      <span class="text-xs" style="color:#444;">© 2026 · Built by Dhanush T S</span>
+      <a href="#home" class="nav-link">Top ↑</a>
+    </div>
+  </footer>
+
+
+
+</body>
+</html>
+```
+
+---
+
+<!-- ## 🔑 Key Integration Points
+```
+id="hero-name"         ← main.js writes portfolioData.name here
+id="projects-grid"     ← main.js builds project cards here
+id="skills-container"  ← main.js builds skill bars here
+id="experience-container" ← main.js builds timeline here
+```
+
+---
+
+## ✅ Final File Checklist
+```
+my-portfolio/
+  ├── index.html          
+  ├── assets/
+  │   ├── css/
+  │   │   └── style.css  
+  │   └── js/
+  │       └── main.js   
+  └── data/
+      └── portfolio.js     -->
+>>>>>>> 8df036c3494e48532acd27fa19986ca13171c207
