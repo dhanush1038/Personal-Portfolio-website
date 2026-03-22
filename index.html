@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/color.css" />
+    <script src="data/port.js" ></script>
+</head>
+    
+
+<body>
+    <!-- Background layers -->
+    <div class="mesh"></div>
+    <div class="grid-bg"></div>
+
+    <!-- Toast -->
+    <div id="toast">✓ Message sent!</div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">  
+        <a href="#about" onclick="closeMobile()">About Me</a>
+        <a href="#projects" onclick="closeMobile()">Projects</a>
+        <a href="#skills" onclick="closeMobile()">Skills</a>
+        <a href="#experience" onclick="closeMobile()">Experience</a>
+        <a href="#contact" onclick="closeMobile()">Contact</a>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <span class="mono text-sm font-bold" style="color: var(--accent)">
+                &lt;Dhanush T S /&gt;
+            </span>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link">About Me</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle light/dark mode" style="background:none;border:px solid var(--accent);cursor:pointer;font-size:1.3rem;color:var(--accent);margin-left:1rem;">
+                <span id="theme-icon"></span>
+            </button>
+           
+
+            <button id="menu-btn" onclick="toggleMobile()" class="md:hidden flex flex-col gap-1.5 p-2">
+                <span class="block w-6 h-0.5 bg-white transition-all"></span>
+                <span class="block w-6 h-0.5 bg-white transition-all"></span>
+                <span class="block w-4 h-0.5 bg-white transition-all"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="min-h-screen flex items-center pt-20 px-1">
+        <div class="max-w-6xl mx-auto w-full py-20">
+            <div class="flex flex-col lg:flex-row items-start justify-between gap-0">
+                <div class="flex-1">
+                    <div class="mono text-xs tracking-widest mb-6" style="color: var(--accent)">
+                        <span id="typed-text"></span><span class="animate-pulse">_</span>
+                    </div>
+
+                    <h1 class="hero-title mb-6">
+                        <span class="hero-line block">Hello, I'm</span>
+                        <span class="hero-line block accent-text">Dhanush</span>
+                        
+                    </h1>
+
+                    <p class="text-base leading-relaxed max-w-md mb-8"
+                        style="color: hsl(249, 45%, 94%); animation: slideUp 0.3s 0.8s cubic-bezier(0.16,1,0.3,1) both;">
+                        
+                    </p>
+
+
+
+
+                    <div class="flex flex-wrap gap-3 mb-10"
+                        style="animation: slideUp 0.3s 0.8s cubic-bezier(0.16,1,0.3,1) both;">
+                        <span class="tag-pill">Fresher</span>
+                        <span class="tag-pill">Entry Level</span>
+                        <span class="tag-pill">Corporate Beginner </span>
+                        <span class="tag-pill">Team Handling</span>    
+                        <span class="tag-pill">Open to Client Work</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4"
+                        style="animation: slideUp 0.3s 0.8s cubic-bezier(0.16,1,0.3,1) both;">
+                        <a href="#projects" class="btn-primary">View Projects ↓</a>
+                        <a href="#contact" class="btn-outline">Hire Me</a>
+                    </div>
+                </div>
+
+                <!-- Avatar area -->
+                <div class="flex-shrink-0 lg:self-center"
+                    style="animation: slideUp 0.1s 0.1s cubic-bezier(0.16,1,0.3,1) both;">
+                    <div class="relative">
+                        <div class="w-64 h-64 flex items-center justify-center relative overflow-hidden">
+                            <div class="profile-photo-glow w-64 h-64">
+                                <span class="profile-photo-outline"></span>
+                                <img src="assets/img/profile.jpeg" alt="Photo" class="profile-photo" />
+                            </div>
+                        </div>
+                        <!-- Decorative dots -->
+                        <div class="absolute -bottom-4 -right-4 w-24 h-24 grid grid-cols-4 gap-1.5">
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.5" id="dot"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.5"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.5"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.5"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.3"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.3"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.3"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.15"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.15"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.15"></div>
+                            <div class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); opacity: 0.15"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal">
+                <div class="section-label mb-3" style="color:#12f39d;">About Me</div>
+                <h2 class="section-title mb-16" style="font-size:2rem;">Who I Am</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="text-lg leading-relaxed mb-6" style="color: #aaa;">
+                       Python full-stack developer with hands-on cloud deployment experience (AWS EC2, S3) across 2 internships, and practical 
+                exposure to NLP, prompt engineering, and agentic AI workflows. Adept at building intelligent applications and automating 
+cloud infrastructure. Seeking an SDE-1 role at a product-driven startup,MNC  to deliver scalable, AI-integrated backend 
+solutions.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-8" style="color: #aaa;">
+                        
+                    </p>
+                    <div class="flex flex-col gap-3 mono text-sm" style="color: #c17272;">
+                        <div class="flex gap-3"><span style="color: var(--accent)">→</span> Based in Bangalore,India
+                        </div>
+                        <div class="flex gap-3"><span style="color: var(--accent)">→</span> Available for freelance projects and full-time roles
+                        </div>
+                        <div class="flex gap-3"><span style="color: var(--accent)">→</span> dhanushts.ask21@gmail.com</div>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1KoIGCMxorIECSg_xU0nO7BRziuONg_vq/view?usp=drivesdk" class="btn-primary mt-8 inline-flex">Download CV↗</a>
+                </div>
+                <div class="reveal grid grid-cols-2 gap-4">
+                    <div class="card p-6">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <div class="font-bold mb-1">Problem Solver</div>
+                        <div class="text-sm" style="color: #666;">I love tackling complex challenges.</div>
+                    </div>
+                    <div class="card p-6">
+                        <div class="text-3xl mb-3">⚡</div>
+                        <div class="font-bold mb-1">Fast Learner</div>
+                        <div class="text-sm" style="color: #666;">Quick to adapt to new technologies.</div>
+                    </div>
+                    <div class="card p-6">
+                        <div class="text-3xl mb-3">🎨</div>
+                        <div class="font-bold mb-1">Design-minded</div>
+                        <div class="text-sm" style="color: #666;">I care about how things look & feel.</div>
+                    </div>
+                    <div class="card p-6">
+                        <div class="text-3xl mb-3">🤝</div>
+                        <div class="font-bold mb-1">Team Player</div>
+                        <div class="text-sm" style="color: #666;">Collaboration is at my core.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- PROJECTS -->
+    <section id="projects" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal flex items-end justify-between mb-16 flex-wrap gap-4">
+                <div>
+                    <div class="section-label mb-3"> Projects</div>
+                    <h2 class="section-title">Real World Simulations</h2>
+                </div>
+                <div class="flex gap-2" id="filter-btns">
+                    <button onclick="filterProjects('all')" class="filter-btn active tag-pill"
+                        data-filter="all">All</button>
+                    <button onclick="filterProjects('web')" class="filter-btn tag-pill" data-filter="web">Web</button>
+                    <button onclick="filterProjects('mobile')" class="filter-btn tag-pill"
+                        data-filter="mobile">Mobile</button>
+                    <button onclick="filterProjects('design')" class="filter-btn tag-pill"
+                        data-filter="design">Design</button>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+                <!-- Project cards -->
+                <div class="card project-card reveal" data-cat="web">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #0d1117, #1a2332);"></div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">Personal AI Desktop Assistant</h3>
+                            <a href="#" class="text-xl hover:scale-125 transition-transform">↗</a>
+                        </div>
+                        <p class="text-sm mb-4" style="color: #666;">Built a voice-controlled assistant in Python using Speech Recognition and pyttsx3 libraries, capable of executing 10+ 
+commands including web search, app launch and news retrieval.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">Open AI</span>
+                            <span class="tag-pill">Twilio</span>
+                            <span class="tag-pill">Flask</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card project-card reveal" data-cat="mobile">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #0f1923, #1a1032);"></div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">Hotel Management System</h3>
+                            <a href="#" class="text-xl hover:scale-125 transition-transform">↗</a>
+                        </div>
+                        <p class="text-sm mb-4" style="color: #666;">Designed a Mysql schema with 7+ relational tables,built CRUD operations using Python and integrated NLP-based 
+command parsing for reception workflows</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">Html5</span>
+                            <span class="tag-pill">Mysql</span>
+                            <span class="tag-pill">CSS3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card project-card reveal" data-cat="design">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #1a0f0f, #2a1a0a);"></div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">Movie Hub UI</h3>
+                            <a href="#" class="text-xl hover:scale-125 transition-transform">↗</a>
+                        </div>
+                        <p class="text-sm mb-4" style="color: #666;">Modern, responsive user interface for a movie discovery app.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-pill">React JS</span>
+                            <span class="tag-pill">Tailwind CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card project-card reveal" data-cat="web">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #0a1a0f, #0f2a1a);"></div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-lg">Product Management UI</h3>
+                            <a href="#" class="text-xl hover:scale-125 transition-transform">↗</a>
+                        </div>
+                        <p class="text-sm mb-4" style="color: #666;">Intuitive interface for managing and tracking product information.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-pill">Django</span>
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">Mysql</span>
+                        </div>
+                    </div>
+                </div>
+                
+             
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16">
+                <div class="section-label mb-3">Skills</div>
+                <h2 class="section-title">My Toolkit</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <h3 class="font-bold text-lg mb-8" style="color: #aaa;">Technical Skills</h3>
+                    <div class="flex flex-col gap-6" id="skill-bars">
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm">
+                                <span>JavaScript / TypeScript</span>
+                                <span class="mono" style="color: var(--accent)">90%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm">
+                                <span>React.js</span>
+                                <span class="mono" style="color: var(--accent)">85%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm">
+                                <span>Python/ Django</span>
+                                <span class="mono" style="color: var(--accent)">75%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm">
+                                <span>Html5/ CSS3 </span>
+                                <span class="mono" style="color: var(--accent)">70%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-width="70"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm">
+                                <span>Prompt Engineering</span>
+                                <span class="mono" style="color: var(--accent)">65%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" data-width="65"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <h3 class="font-bold text-lg mb-8" style="color: #aaa;">Technologies</h3>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">React</div>
+                        </div>
+                        <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">HTML5</div>
+                        </div>
+                        <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">prompt engineering</div>
+                        </div>
+                        <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">Python</div>
+                        </div>
+                      
+                        <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">MYSQL</div>
+                        </div>
+                        <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">CSS3</div>
+                        </div>
+                        <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">AWS</div>
+                        </div>
+                        <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">Django</div>
+                        </div>
+                         <div class="card p-4 text-center">
+                            <div class="text-2xl mb-2"></div>
+                            <div class="text-xs" style="color: #888;">JavaScript</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16">
+                <div class="section-label mb-3"> Experience</div>
+                <h2 class="section-title">My Journey</h2>
+            </div>
+            <div class="flex flex-col gap-10 max-w-2xl">
+                <div class="timeline-item reveal">
+                    <div class="card p-6">
+                        <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
+                            <div>
+                                <h3 class="font-bold text-lg">Cloud Engineering Intern</h3>
+                                <div class="text-sm" style="color: var(--accent)">Anudip Foundation</div>
+                            </div>
+                            <span class="mono text-xs px-3 py-1 rounded-full"
+                                style="background: var(--border); color: #888;">2024 – </span>
+                        </div>
+                        <p class="text-sm leading-relaxed" style="color: #666;">
+                           Integrated IAM roles and policies to manage secure access control across services. 
+                          Assisted in environment provisioning and cloud resource optimization.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="card p-6">
+                        <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
+                            <div>
+                                <h3 class="font-bold text-lg">Software Development Intern </h3>
+                                <div class="text-sm" style="color: var(--accent)">ARK Infosolutions Pvt Ltd</div>
+                            </div>
+                            <span class="mono text-xs px-3 py-1 rounded-full"
+                                style="background: var(--border); color: #888;">2023</span>
+                        </div>
+                        <p class="text-sm leading-relaxed" style="color: #666;">
+                          Optimised 5+ SQL stored procedures, reducing average query time by 30%. 
+ Used version control (Git) to manage iterative development cycles and maintain code integrity. 
+                        </p>
+                    </div>
+                </div>
+                
+           
+    
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal mb-16">
+                <div class="section-label mb-3"> Contact</div>
+                <h2 class="section-title">Let's Connect</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <p class="text-lg leading-relaxed mb-8" style="color:whitesmoke">
+                        Have a project in mind? Want to collaborate? Or just want to say hi?
+                        My inbox is always open — I'll get back within 24 hours.
+                    </p>
+                    <div class="flex flex-col gap-4 mono text-sm" style="color: #666;">
+                        <a href="mailto:dhanushts.ask21@gmail.com"
+                            class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span style="color: var(--accent)">✉</span>dhanushts.ask21@gmail.com
+                        </a>
+                        <a href="https://github.com/dhanush1038" class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span style="color: var(--accent)">⌥</span> github.com/dhanush1038
+                        </a>
+                        <a href="https://www.linkedin.com/in/dhanushtssoftwareengineer"
+                            class="flex items-center gap-3 hover:text-white transition-colors">
+                            <span style="color: var(--accent)">in</span> linkedin.com/dhanush
+                        </a>
+                        
+                    </div>
+                </div>
+                <div class="card p-8 reveal">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs uppercase tracking-widest mb-2 block"
+                                    style="color: #fff4f4;">Name</label>
+                                <input type="text" id="form-name" placeholder="Your name" class="input-field" />
+                            </div>
+                            <div>
+                                <label class="text-xs uppercase tracking-widest mb-2 block"
+                                    style="color: #fff4f4;">Email</label>
+                                <input type="email" id="form-email" placeholder="you@email.com" class="input-field" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs uppercase tracking-widest mb-2 block"
+                                style="color: #fff4f4;">Subject</label>
+                            <input type="text" id="form-subject" placeholder="Project idea / collab / hello"
+                                class="input-field" />
+                        </div>
+                        <div>
+                            <label class="text-xs uppercase tracking-widest mb-2 block"
+                                style="color: #fff4f4;">Message</label>
+                            <textarea id="form-message" rows="4" placeholder="Tell me more..."
+                                class="input-field resize-none"></textarea>
+                        </div>
+                        <button onclick="sendMessage()" class="btn-primary w-full justify-center">
+                            Send Message →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FOOTER -->
+    <footer style="border-top: 1px solid var(--border);" class="py-10 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <span class="mono text-sm" style="color: var(--accent)">&lt;Dhanush T S /&gt;</span>
+            
+            <div class="flex gap-6">
+                <a href="#home" class="nav-link"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/prop.js"></script>
+        
+</body>
+
+</html>
